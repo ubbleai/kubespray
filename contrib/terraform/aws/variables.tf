@@ -25,7 +25,7 @@ data "aws_ami" "distro" {
 
   filter {
     name   = "name"
-    values = ["CoreOS-stable-*"]
+    values = ["debian-10-amd64-*"]
   }
 
   filter {
@@ -33,7 +33,7 @@ data "aws_ami" "distro" {
     values = ["hvm"]
   }
 
-  owners = ["595879546273"] #CoreOS
+  owners = ["136693071363"] #CoreOS
 }
 
 //AWS VPC Variables

@@ -13,13 +13,13 @@ aws_bastion_size = "t2.medium"
 #Kubernetes Cluster
 
 aws_kube_master_num  = 3
-aws_kube_master_size = "t2.medium"
+aws_kube_master_size = "m5.2xlarge"
 
-aws_etcd_num  = 3
-aws_etcd_size = "t2.medium"
+aws_etcd_num  = 0
+aws_etcd_size = "m5.xlarge"
 
-aws_kube_worker_num  = 4
-aws_kube_worker_size = "t2.medium"
+aws_kube_worker_num  = 15
+aws_kube_worker_size = "m5.xlarge"
 
 #Settings AWS ELB
 

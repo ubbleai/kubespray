@@ -87,6 +87,12 @@ resource "aws_instance" "k8s-master" {
   iam_instance_profile = "${module.aws-iam.kube-master-profile}"
   key_name             = "${var.AWS_SSH_KEY_NAME}"
 
+  root_block_device {
+    delete_on_termination = true
+    volume_size           = 128
+    volume_type           = "gp2"
+  }
+
   tags = "${merge(var.default_tags, map(
     "Name", "kubernetes-${var.aws_cluster_name}-master${count.index}",
     "kubernetes.io/cluster/${var.aws_cluster_name}", "member",
@@ -133,6 +139,19 @@ resource "aws_instance" "k8s-worker" {
 
   iam_instance_profile = "${module.aws-iam.kube-worker-profile}"
   key_name             = "${var.AWS_SSH_KEY_NAME}"
+
+  root_block_device {
+    delete_on_termination = true
+    volume_size           = 128
+    volume_type           = "gp2"
+  }
+
+  ebs_block_device {
+    volume_type = "gp2"
+    volume_size = "200"
+    delete_on_termination = true
+    device_name           = "/dev/sdb"
+  }
 
   tags = "${merge(var.default_tags, map(
     "Name", "kubernetes-${var.aws_cluster_name}-worker${count.index}",
